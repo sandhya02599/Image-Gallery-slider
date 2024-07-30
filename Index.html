@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery Using JS</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            box-sizing: border-box;
+        }
+        .gallery{
+            width: 600px;
+            display: flex;
+            overflow-x: scroll;
+        }
+        .gallery div{
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 20px;
+            padding: 10px;
+            flex: none;
+        }
+        .gallery div img{
+            width: 100%;
+            height: 100%;
+            filter: grayscale(100%);
+            transition: transform 0.7s;
+
+        }
+        .gallery::-webkit-scrollbar{
+            display: none;
+        }
+        .gallery-wrap{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10% auto;
+        }
+        #backBtn, #nextBtn{
+            width: 50px;
+            cursor: pointer;
+            margin: 40px;
+        }
+        .gallery div img:hover{
+            filter: grayscale(0);
+            cursor: pointer;
+            transform: scale(1,1);
+            background-color: aqua;
+            color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-wrap">
+        <img src="Image/back-button.jpg" id="backBtn">
+
+        <div class="gallery">
+            <div>
+                <img src="Image/img1.webp">
+                <img src="Image/img2.jpg">
+                <img src="Image/img3.jpeg">
+            </div>
+            <div>
+                <img src="Image/img4.webp">
+                <img src="Image/img5.jpeg">
+                <img src="Image/img6.jpg">
+            </div>
+        </div> 
+        <img src="Image/nextBtn.jpg" id="nextBtn">
+    </div>
+    <script>
+        let sandhya = document.querySelector(".gallery");
+        let backBtn = document.querySelector("#backBtn");
+        let nextBtn = document.querySelector("#nextBtn");
+
+         sandhya.addEventListener("wheel", (event) =>{
+            event.preventDefault();
+            sandhya.scrollLeft += event.deltaY;
+            sandhya.style.scrollBehavior = "auto";
+        });
+
+        nextBtn.addEventListener("click", ()=>{
+            sandhya.style.scrollBehavior = "smooth";
+            sandhya.scrollLeft += 900;
+        });
+
+        backBtn.addEventListener("click", ()=>{
+            sandhya.style.scrollBehavior = "smooth";
+            sandhya.scrollLeft -=900;
+        });
+    </script>
+</body>
+</html>
